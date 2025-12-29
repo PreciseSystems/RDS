@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Contact Us | Raaga Defence Systems</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body { padding-top:70px; }
+.section-padding { padding:80px 0; }
+.form-control:focus {
+  box-shadow: none;
+  border-color: #0b1c2d;
+}
+.contact-card {
+  background:#0b1c2d;
+  color:#fff;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<div class="container">
+  <a class="navbar-brand" href="index.html">RAAGA DEFENCE SYSTEMS</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#rdsNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="rdsNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="About.html">About</a></li>
+      <li class="nav-item"><a class="nav-link active" href="Contact.html">Contact</a></li>
+    </ul>
+  </div>
+</div>
+</nav>
+
+<!-- ================= CONTACT HEADER ================= -->
+<section class="section-padding bg-dark text-white text-center">
+  <div class="container">
+    <h1>Contact Raaga Defence Systems</h1>
+    <p class="mt-3">
+      Reach out to us for defence manufacturing, fabrication, integration
+      or project collaboration.
+    </p>
+  </div>
+</section>
+
+<!-- ================= CONTACT CONTENT ================= -->
+<section class="section-padding">
+<div class="container">
+<div class="row g-5">
+
+  <!-- CONTACT FORM -->
+  <div class="col-lg-7">
+    <h3 class="mb-4">Send Us a Message</h3>
+
+    <form id="contactForm" class="needs-validation" novalidate>
+
+      <div class="row g-3">
+        <div class="col-md-6 form-floating">
+          <input type="text" class="form-control" id="name" placeholder="Name" required>
+          <label for="name">Your Name</label>
+        </div>
+
+        <div class="col-md-6 form-floating">
+          <input type="email" class="form-control" id="email" placeholder="Email" required>
+          <label for="email">Email Address</label>
+        </div>
+
+        <div class="col-md-6 form-floating">
+          <input type="text" class="form-control" id="company" placeholder="Company">
+          <label for="company">Organization / Unit</label>
+        </div>
+
+        <div class="col-md-6 form-floating">
+          <input type="tel" class="form-control" id="phone" placeholder="Phone">
+          <label for="phone">Contact Number</label>
+        </div>
+
+        <div class="col-12 form-floating">
+          <select class="form-select" id="interest" required>
+            <option value="">Select</option>
+            <option>Shooting Ranges</option>
+            <option>Armoured Vehicles</option>
+            <option>Defence Enclosures</option>
+            <option>CBRN / ESV Vehicles</option>
+            <option>Core Fabrication</option>
+            <option>Other</option>
+          </select>
+          <label for="interest">Area of Interest</label>
+        </div>
+
+        <div class="col-12 form-floating">
+          <textarea class="form-control" placeholder="Message" id="message" style="height:140px" required></textarea>
+          <label for="message">Your Message</label>
+        </div>
+
+        <div class="col-12">
+          <button class="btn btn-dark px-5 py-2" type="submit">
+            Submit Enquiry
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <!-- CONTACT DETAILS -->
+  <div class="col-lg-5">
+    <div class="contact-card p-4 h-100">
+      <h4>Contact Details</h4>
+      <hr class="border-light">
+
+      <p><strong>Raaga Defence Systems</strong></p>
+      <p>
+        N-47, Additional MIDC<br>
+        Satara – 415004<br>
+        Maharashtra, India
+      </p>
+
+      <p>
+        📧 info@raagadefencesystems.com<br>
+        📞 +91-XXXXXXXXXX
+      </p>
+
+      <p>
+        🕒 Working Hours:<br>
+        Monday – Saturday | 10:00 AM – 6:00 PM
+      </p>
+    </div>
+  </div>
+
+</div>
+</div>
+</section>
+
+<!-- ================= MAP ================= -->
+<section>
+  <iframe
+    src="https://maps.google.com/maps?q=N-47%20Additional%20MIDC%20Satara&t=&z=15&ie=UTF8&iwloc=&output=embed"
+    width="100%" height="400" style="border:0;" loading="lazy">
+  </iframe>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="pt-5 pb-4" style="background:#0b1c2d;color:#fff;">
+<div class="container">
+<div class="row">
+  <div class="col-md-4">
+    <h6>Raaga Defence Systems</h6>
+    <p>Indigenous Defence Manufacturing</p>
+  </div>
+  <div class="col-md-4">
+    <h6>Quick Links</h6>
+    <ul class="list-unstyled">
+      <li><a href="About.html" class="text-white text-decoration-none">About</a></li>
+      <li><a href="Contact.html" class="text-white text-decoration-none">Contact</a></li>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <h6>Location</h6>
+    <p>Satara, Maharashtra</p>
+  </div>
+</div>
+</div>
+</footer>
+
+<footer class="py-3 text-center bg-dark text-white">
+© 2025 Raaga Defence Systems
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- FORM VALIDATION -->
+<script>
+(() => {
+  'use strict';
+  const forms = document.querySelectorAll('.needs-validation');
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+</script>
+
+</body>
+</html>
