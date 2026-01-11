@@ -20,52 +20,45 @@ body {
   letter-spacing: 1px;
 }
 
-/* ---------- HERO CAROUSEL ---------- */
-.hero-slide {
-  position: relative;
-  height: 85vh;
-  overflow: hidden;
+/* HERO OVERLAY */
+.hero-overlay {
+  color: #fff;
+  max-width: 600px;
 }
 
-.hero-slide::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--bg-img);
-  background-size: cover;
-  background-position: center;
-  filter: blur(12px);
-  transform: scale(1.1);
-  z-index: 1;
+.hero-overlay h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
 }
 
-.hero-slide::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  z-index: 2;
+.hero-overlay p {
+  font-size: 1.1rem;
+  margin-top: 10px;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 3;
-  height: 100%;
+/* CUBE EFFECT */
+.cube-carousel .carousel-inner {
+  perspective: 1200px;
 }
 
-.hero-image {
-  max-height: 420px;
-  object-fit: contain;
+.cube-carousel .carousel-item {
+  transition: transform 0.9s ease-in-out;
+  backface-visibility: hidden;
 }
 
-/* ---------- TEXT ---------- */
-.hero-text h1 {
-  font-size: clamp(1.8rem, 3vw, 3rem);
+.cube-carousel .carousel-item-next.carousel-item-start,
+.cube-carousel .carousel-item-prev.carousel-item-end {
+  transform: rotateY(-90deg);
 }
 
-.hero-text p {
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
+.cube-carousel .carousel-item-start {
+  transform: rotateY(90deg);
 }
+
+.cube-carousel .active.carousel-item {
+  transform: rotateY(0deg);
+}
+
 
 /* ---------- SECTIONS ---------- */
 .section-padding {
@@ -77,62 +70,87 @@ footer {
   background: #111;
   color: #bbb;
 }
-/* BASE */
-.mega-dropdown { position: static; }
-.mega-menu {
-  width: 100vw;
-  height: 80vh;
-  padding: 0;
-  background: #081b2d;
+/* ================= BASE ================= */
+.mega-dropdown {
+  position: static !important; /* lock dropdown to navbar width */
 }
 
-/* GRID */
+.mega-menu {
+  width: 100vw;
+  height: 90vh;
+  padding: 0;
+  margin: 0;
+  border: none;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+  background: #081b2d;
+  display: none; /* controlled by hover */
+}
+
+/* === HOVER OPEN === */
+.mega-dropdown:hover > .mega-menu {
+  display: block;
+}
+
+/* ================= GRID ================= */
 .mega-grid {
   display: grid;
   grid-template-columns: 20% 25% 55%;
   height: 100%;
 }
 
-/* COLUMNS */
+/* ================= COLUMNS ================= */
 .mega-col {
   padding: 20px;
   color: #fff;
+  overflow-y: auto;
 }
 
-.mega-main { background:#071625; }
-.mega-sub  { background:#0b243f; }
-.mega-products { background:#020f1d; }
+.mega-main     { background: #071625; }
+.mega-sub      { background: #0b243f; }
+.mega-products { background: #020f1d; }
 
-/* MAIN ITEMS */
+/* ================= MAIN ITEMS ================= */
 .main-item {
   padding: 14px 18px;
   cursor: pointer;
   font-weight: 600;
+  transition: background 0.2s ease;
 }
+
 .main-item:hover,
 .main-item.active {
   background: #0b2a4a;
 }
 
-/* SUB ITEMS */
-.sub-group { display:none; }
-.sub-group.show { display:block; }
+/* ================= SUB ITEMS ================= */
+.sub-group {
+  display: none;
+}
+
+.sub-group.show {
+  display: block;
+}
 
 .sub-item {
   padding: 12px 18px;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
+
 .sub-item:hover,
 .sub-item.active {
   background: #123a63;
 }
 
-/* PRODUCT GRID */
+/* ================= PRODUCT GRID ================= */
 .product-grid {
   display: none;
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
 }
+
 .product-grid.show {
   display: grid;
 }
@@ -140,18 +158,143 @@ footer {
 .product-grid img {
   width: 100%;
   border-radius: 6px;
-  transition: 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .product-grid img:hover {
-  box-shadow: 0 0 18px #3ec6ff;
+  box-shadow: 0 0 18px rgba(62,198,255,0.8);
   transform: scale(1.05);
 }
+
+/* ================= MISC ================= */
 .carousel-item {
   min-height: 180px;
 }
+
 .blockquote p {
   max-width: 900px;
   margin: auto;
+}
+/* === FIX BOOTSTRAP OVERRIDE === */
+.cube-carousel .carousel-item {
+  transition: none !important;
+}
+
+/* === CUBE ANIMATION (STABLE) === */
+.cube-carousel .carousel-inner {
+  perspective: 1400px;
+}
+
+.cube-carousel .carousel-item {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.cube-carousel .carousel-item.active {
+  opacity: 1;
+  position: relative;
+}
+
+/* ENTER / EXIT STATES */
+.cube-in {
+  animation: cubeIn 0.9s forwards;
+}
+
+.cube-out {
+  animation: cubeOut 0.9s forwards;
+}
+
+/* KEYFRAMES */
+@keyframes cubeIn {
+  from {
+    transform: rotateY(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes cubeOut {
+  from {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: rotateY(-90deg);
+    opacity: 0;
+  }
+}
+/* MAIN MENU ACTIVE LINE */
+.main-item {
+  position: relative;
+}
+
+.main-item.active::after,
+.main-item:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: #3ec6ff;
+}
+
+/* SUB MENU LEFT CONNECTOR */
+.sub-group {
+  position: relative;
+}
+
+.sub-group::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: rgba(62,198,255,0.35);
+}
+
+/* SUB ITEM ACTIVE LINE */
+.sub-item {
+  position: relative;
+}
+
+.sub-item.active::after,
+.sub-item:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: #3ec6ff;
+}
+
+/* PRODUCT GRID TOP CONNECTOR */
+.product-grid {
+  position: relative;
+  padding-top: 12px;
+}
+
+.product-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    rgba(62,198,255,0.4),
+    #3ec6ff,
+    rgba(62,198,255,0.4)
+  );
 }
 
 
@@ -174,16 +317,17 @@ footer {
       <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
 
       <li class="nav-item dropdown mega-dropdown">
-  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+  <a class="nav-link" href="#">
     Defence Solutions
   </a>
 
   <div class="dropdown-menu mega-menu">
     <div class="mega-grid">
+       
 
       <!-- COLUMN 1 : MAIN CATEGORIES -->
       <div class="mega-col mega-main">
-        <div class="main-item active" data-main="land">Land Systems</div>
+        <div class="main-item active sub-group.show" data-main="land">Land Systems</div>
         <div class="main-item" data-main="air">Aerospace Systems</div>
         <div class="main-item" data-main="naval">Naval Systems</div>
         <div class="main-item" data-main="ad">Air Defence</div>
@@ -230,11 +374,11 @@ footer {
       <div class="mega-col mega-products">
 
         <div class="product-grid show" data-products="SHOOTING">
-          <a href="#"><img src="assets/tank1.jpg"></a>
-          <a href="#"><img src="assets/tank2.jpg"></a>
-          <a href="#"><img src="assets/tank3.jpg"></a>
-            <a href="#"><img src="assets/tank4.jpg"></a>
-            <a href="#"><img src="assets/tank5.jpg"></a>
+          <a href="shootingrange.html"><img src="assets/cisr.jpeg"></a>
+          <a href="shootingrange.html"><img src="assets/tank2.jpg"></a>
+          <a href="shootingrange.html"><img src="assets/tank3.jpg"></a>
+            <a href="shootingrange.html"><img src="assets/tank4.jpg"></a>
+            <a href="shootingrange.html"><img src="assets/tank5.jpg"></a>
         </div>
         <div class="product-grid show" data-products="Armoured">
           <a href="#"><img src="assets/art1.jpg"></a>
@@ -339,72 +483,64 @@ footer {
 </div>
 </nav>
 
-<!-- ================= HERO CAROUSEL ================= -->
-<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+<div id="carouselExampleIndicators"
+     class="carousel slide"
+     data-bs-ride="carousel">
 
-<div class="carousel-inner">
+  <!-- INDICATORS -->
+  <div class="carousel-indicators">
+    <button type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"></button>
 
-<!-- Slide 1 -->
-<div class="carousel-item active">
-  <div class="hero-slide" style="--bg-img:url('assets/slide1.jpg')">
-    <div class="container hero-content d-flex align-items-center">
-      <div class="row w-100 align-items-center">
-        <div class="col-lg-6 text-white hero-text">
-          <h1>Containerised Shooting Ranges</h1>
-          <p>Patented, modular & combat-ready firing range solutions</p>
-        </div>
-        <div class="col-lg-6 text-center">
-          <img src="assets/slide1.jpg" class="img-fluid hero-image">
-        </div>
-      </div>
-    </div>
+    <button type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+
+    <button type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
   </div>
-</div>
 
-<!-- Slide 2 -->
-<div class="carousel-item">
-  <div class="hero-slide" style="--bg-img:url('assets/slide2.jpg')">
-    <div class="container hero-content d-flex align-items-center">
-      <div class="row w-100 align-items-center">
-        <div class="col-lg-6 text-white hero-text">
-          <h1>Armoured & Tactical Vehicles</h1>
-          <p>Mission-specific defence mobility platforms</p>
-        </div>
-        <div class="col-lg-6 text-center">
-          <img src="assets/slide2.jpg" class="img-fluid hero-image">
-        </div>
-      </div>
+  <!-- SLIDES -->
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <img src="assets/ak.png" class="d-block w-100" alt="First slide">
     </div>
-  </div>
-</div>
 
-<!-- Slide 3 -->
-<div class="carousel-item">
-  <div class="hero-slide" style="--bg-img:url('assets/slide3.jpg')">
-    <div class="container hero-content d-flex align-items-center">
-      <div class="row w-100 align-items-center">
-        <div class="col-lg-6 text-white hero-text">
-          <h1>Make in India Defence R&D</h1>
-          <p>Indigenous engineering with global technology integration</p>
-        </div>
-        <div class="col-lg-6 text-center">
-          <img src="assets/slide3.jpg" class="img-fluid hero-image">
-        </div>
-      </div>
+    <div class="carousel-item">
+      <img src="assets/ve.png" class="d-block w-100" alt="Second slide">
     </div>
+
+    <div class="carousel-item">
+      <img src="assets/ta.png" class="d-block w-100" alt="Third slide">
+    </div>
+
   </div>
-</div>
+
+  <!-- CONTROLS -->
+  <button class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+
+  <button class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
 
 </div>
 
-<button class="carousel-control-prev" data-bs-target="#heroCarousel" data-bs-slide="prev">
-  <span class="carousel-control-prev-icon"></span>
-</button>
-<button class="carousel-control-next" data-bs-target="#heroCarousel" data-bs-slide="next">
-  <span class="carousel-control-next-icon"></span>
-</button>
-
-</div>
     <section class="section-padding bg-dark text-white">
   <div class="container-fluid">
     <div class="row align-items-center">
@@ -444,7 +580,11 @@ footer {
              style="width:100px;height:100px;line-height:100px;">📦</div>
         <h6>Containerised Systems</h6>
       </div>
-
+<div class="col-md-4">
+        <div class="rounded-circle bg-dark text-white mx-auto mb-3"
+             style="width:100px;height:100px;line-height:100px;">📦</div>
+        <h6>Containerised Systems</h6>
+      </div>
     </div>
   </div>
 </section>
@@ -575,8 +715,7 @@ footer {
       </div>
 
       <div class="col-lg-6 p-0">
-        <iframe
-          src="https://maps.google.com/maps?q=N-47%20Additional%20MIDC%20Satara&t=&z=15&ie=UTF8&iwloc=&output=embed"
+        <iframe src="https://maps.google.com/maps?q=N-47%20Additional%20MIDC%20Satara&t=&z=15&ie=UTF8&iwloc=&output=embed"
           width="100%" height="100%" style="border:0;"></iframe>
       </div>
 
@@ -627,6 +766,9 @@ footer {
 
 <!-- Bootstrap JS (IMPORTANT) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
 document.querySelectorAll('.main-item').forEach(main => {
   main.addEventListener('mouseenter', () => {
@@ -646,8 +788,13 @@ document.querySelectorAll('.sub-item').forEach(sub => {
     document.querySelectorAll('.product-grid').forEach(p => p.classList.remove('show'));
     document.querySelector(`.product-grid[data-products="${sub.dataset.sub}"]`).classList.add('show');
   });
-});
+});    
+  $('.carousel').carousel({
+  interval: 2000
+})
 </script>
+    
+
 
 </body>
 </html>

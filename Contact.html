@@ -2,24 +2,301 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Contact Us | Raaga Defence Systems</title>
+<title>Raaga Defence Systems</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-body { padding-top:70px; }
-.section-padding { padding:80px 0; }
-.form-control:focus {
-  box-shadow: none;
-  border-color: #0b1c2d;
+/* ---------- GLOBAL ---------- */
+body {
+  padding-top: 70px;
 }
-.contact-card {
-  background:#0b1c2d;
-  color:#fff;
-  border-radius:10px;
+
+/* ---------- NAVBAR ---------- */
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 1px;
 }
+
+/* HERO OVERLAY */
+.hero-overlay {
+  color: #fff;
+  max-width: 600px;
+}
+
+.hero-overlay h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+}
+
+.hero-overlay p {
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+/* CUBE EFFECT */
+.cube-carousel .carousel-inner {
+  perspective: 1200px;
+}
+
+.cube-carousel .carousel-item {
+  transition: transform 0.9s ease-in-out;
+  backface-visibility: hidden;
+}
+
+.cube-carousel .carousel-item-next.carousel-item-start,
+.cube-carousel .carousel-item-prev.carousel-item-end {
+  transform: rotateY(-90deg);
+}
+
+.cube-carousel .carousel-item-start {
+  transform: rotateY(90deg);
+}
+
+.cube-carousel .active.carousel-item {
+  transform: rotateY(0deg);
+}
+
+
+/* ---------- SECTIONS ---------- */
+.section-padding {
+  padding: 80px 0;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background: #111;
+  color: #bbb;
+}
+/* ================= BASE ================= */
+.mega-dropdown {
+  position: static !important; /* lock dropdown to navbar width */
+}
+
+.mega-menu {
+  width: 100vw;
+  height: 90vh;
+  padding: 0;
+  margin: 0;
+  border: none;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+  background: #081b2d;
+  display: none; /* controlled by hover */
+}
+
+/* === HOVER OPEN === */
+.mega-dropdown:hover > .mega-menu {
+  display: block;
+}
+
+/* ================= GRID ================= */
+.mega-grid {
+  display: grid;
+  grid-template-columns: 20% 25% 55%;
+  height: 100%;
+}
+
+/* ================= COLUMNS ================= */
+.mega-col {
+  padding: 20px;
+  color: #fff;
+  overflow-y: auto;
+}
+
+.mega-main     { background: #071625; }
+.mega-sub      { background: #0b243f; }
+.mega-products { background: #020f1d; }
+
+/* ================= MAIN ITEMS ================= */
+.main-item {
+  padding: 14px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.main-item:hover,
+.main-item.active {
+  background: #0b2a4a;
+}
+
+/* ================= SUB ITEMS ================= */
+.sub-group {
+  display: none;
+}
+
+.sub-group.show {
+  display: block;
+}
+
+.sub-item {
+  padding: 12px 18px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sub-item:hover,
+.sub-item.active {
+  background: #123a63;
+}
+
+/* ================= PRODUCT GRID ================= */
+.product-grid {
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.product-grid.show {
+  display: grid;
+}
+
+.product-grid img {
+  width: 100%;
+  border-radius: 6px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-grid img:hover {
+  box-shadow: 0 0 18px rgba(62,198,255,0.8);
+  transform: scale(1.05);
+}
+
+/* ================= MISC ================= */
+.carousel-item {
+  min-height: 180px;
+}
+
+.blockquote p {
+  max-width: 900px;
+  margin: auto;
+}
+/* === FIX BOOTSTRAP OVERRIDE === */
+.cube-carousel .carousel-item {
+  transition: none !important;
+}
+
+/* === CUBE ANIMATION (STABLE) === */
+.cube-carousel .carousel-inner {
+  perspective: 1400px;
+}
+
+.cube-carousel .carousel-item {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.cube-carousel .carousel-item.active {
+  opacity: 1;
+  position: relative;
+}
+
+/* ENTER / EXIT STATES */
+.cube-in {
+  animation: cubeIn 0.9s forwards;
+}
+
+.cube-out {
+  animation: cubeOut 0.9s forwards;
+}
+
+/* KEYFRAMES */
+@keyframes cubeIn {
+  from {
+    transform: rotateY(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes cubeOut {
+  from {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: rotateY(-90deg);
+    opacity: 0;
+  }
+}
+/* MAIN MENU ACTIVE LINE */
+.main-item {
+  position: relative;
+}
+
+.main-item.active::after,
+.main-item:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: #3ec6ff;
+}
+
+/* SUB MENU LEFT CONNECTOR */
+.sub-group {
+  position: relative;
+}
+
+.sub-group::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: rgba(62,198,255,0.35);
+}
+
+/* SUB ITEM ACTIVE LINE */
+.sub-item {
+  position: relative;
+}
+
+.sub-item.active::after,
+.sub-item:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: #3ec6ff;
+}
+
+/* PRODUCT GRID TOP CONNECTOR */
+.product-grid {
+  position: relative;
+  padding-top: 12px;
+}
+
+.product-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    rgba(62,198,255,0.4),
+    #3ec6ff,
+    rgba(62,198,255,0.4)
+  );
+}
+
 </style>
 </head>
 
@@ -28,20 +305,182 @@ body { padding-top:70px; }
 <!-- ================= NAVBAR ================= -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 <div class="container">
-  <a class="navbar-brand" href="index.html">RAAGA DEFENCE SYSTEMS</a>
+  <a class="navbar-brand" href="#">RAAGA DEFENCE SYSTEMS</a>
+
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#rdsNav">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div class="collapse navbar-collapse" id="rdsNav">
     <ul class="navbar-nav ms-auto">
       <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+
+      <li class="nav-item dropdown mega-dropdown">
+  <a class="nav-link" href="#">
+    Defence Solutions
+  </a>
+
+  <div class="dropdown-menu mega-menu">
+    <div class="mega-grid">
+       
+
+      <!-- COLUMN 1 : MAIN CATEGORIES -->
+      <div class="mega-col mega-main">
+        <div class="main-item active sub-group.show" data-main="land">Land Systems</div>
+        <div class="main-item" data-main="air">Aerospace Systems</div>
+        <div class="main-item" data-main="naval">Naval Systems</div>
+        <div class="main-item" data-main="ad">Air Defence</div>
+        <div class="main-item" data-main="security">Core Fabrication</div>
+      </div>
+
+      <!-- COLUMN 2 : SUB CATEGORIES -->
+      <div class="mega-col mega-sub">
+
+        <div class="sub-group show" data-parent="land">
+          <div class="sub-item" data-sub="SHOOTING">SHOOTING RANGES</div>
+          <div class="sub-item" data-sub="Armoured">Armoured Vehicles & Buses</div>
+          <div class="sub-item" data-sub="Enclosures">Defence Enclosures</div>
+          <div class="sub-item" data-sub="CBRN">CBRN / ESV Vehicles</div>    
+        </div>
+
+        <div class="sub-group" data-parent="air">
+          <div class="sub-item" data-sub="Engine">Engine Containers</div>
+          <div class="sub-item" data-sub="Ground">Ground Systems & Enclosures</div>
+          <div class="sub-item" data-sub="EMI">EMI/EMS SHELTERS</div>
+          <div class="sub-item" data-sub="R&D">R&D Fabrication Support</div>
+        </div>
+
+        <div class="sub-group" data-parent="naval">
+          <div class="sub-item" data-sub="Shipborne">Shipborne Enclosures</div>
+          <div class="sub-item" data-sub="NIS">Naval Infrastructure Support</div>
+          <div class="sub-item" data-sub="SC">STORAGE CONTAINERS</div>
+          <div class="sub-item" data-sub="CBS">CONTAINER BASED SUBSYSTEMS</div>
+        </div>
+
+        <div class="sub-group" data-parent="ad">
+          <div class="sub-item" data-sub="sam">Radar & Missile Enclosures</div>
+          <div class="sub-item" data-sub="radar">Strategic Program Support</div>
+        </div>
+
+        <div class="sub-group" data-parent="security">
+          <div class="sub-item" data-sub="Heavy">Heavy & BR Fabrication</div>
+          <div class="sub-item" data-sub="Precision">Precision Manufacturing</div>
+        </div>
+
+      </div>
+
+      <!-- COLUMN 3 : PRODUCT IMAGES -->
+      <div class="mega-col mega-products">
+
+        <div class="product-grid show" data-products="SHOOTING">
+          <a href="shootingrange.html"><img src="assets/cisr.jpeg"></a>
+          <a href="shootingrange.html"><img src="assets/tank2.jpg"></a>
+          <a href="shootingrange.html"><img src="assets/tank3.jpg"></a>
+            <a href="shootingrange.html"><img src="assets/tank4.jpg"></a>
+            <a href="shootingrange.html"><img src="assets/tank5.jpg"></a>
+        </div>
+        <div class="product-grid show" data-products="Armoured">
+          <a href="#"><img src="assets/art1.jpg"></a>
+          <a href="#"><img src="assets/art2.jpg"></a>
+          <a href="#"><img src="assets/art3.jpg"></a>
+          <a href="#"><img src="assets/art4.jpg"></a>
+        </div>
+            <div class="product-grid show" data-products="Enclosures">
+          <a href="#"><img src="assets/Enclosures1.jpg"></a>
+          <a href="#"><img src="assets/Enclosures2.jpg"></a>
+          <a href="#"><img src="assets/Enclosures3.jpg"></a>
+          <a href="#"><img src="assets/Enclosures4.jpg"></a>
+        </div>
+          <div class="product-grid show" data-products="CBRN">
+          <a href="#"><img src="assets/CBRN1.jpg"></a>
+          <a href="#"><img src="assets/CBRN2.jpg"></a>
+          <a href="#"><img src="assets/CBRN3.jpg"></a>
+          <a href="#"><img src="assets/CBRN4.jpg"></a>
+        </div>
+        <div class="product-grid show" data-products="Engine">
+          <a href="#"><img src="assets/tank1.jpg"></a>
+          <a href="#"><img src="assets/tank2.jpg"></a>
+          <a href="#"><img src="assets/tank3.jpg"></a>
+        </div>
+        <div class="product-grid show" data-products="Ground">
+          <a href="#"><img src="assets/art1.jpg"></a>
+          <a href="#"><img src="assets/art2.jpg"></a>
+          <a href="#"><img src="assets/art3.jpg"></a>
+          <a href="#"><img src="assets/art4.jpg"></a>
+        </div>
+            <div class="product-grid show" data-products="EMI">
+          <a href="#"><img src="assets/Enclosures1.jpg"></a>
+          <a href="#"><img src="assets/Enclosures2.jpg"></a>
+          <a href="#"><img src="assets/Enclosures3.jpg"></a>
+          <a href="#"><img src="assets/Enclosures4.jpg"></a>
+        </div>
+          <div class="product-grid show" data-products="R&D">
+          <a href="#"><img src="assets/CBRN1.jpg"></a>
+          <a href="#"><img src="assets/CBRN2.jpg"></a>
+          <a href="#"><img src="assets/CBRN3.jpg"></a>
+          <a href="#"><img src="assets/CBRN4.jpg"></a>
+        </div>
+          <div class="product-grid show" data-products="Shipborne">
+          <a href="#"><img src="assets/Shipborne1.jpg"></a>
+          <a href="#"><img src="assets/Shipborne2.jpg"></a>
+          <a href="#"><img src="assets/Shipborne3.jpg"></a>
+          <a href="#"><img src="assets/Shipborne4.jpg"></a>
+        </div>
+        <div class="product-grid show" data-products="NIS">
+          <a href="#"><img src="assets/NIS1.jpg"></a>
+          <a href="#"><img src="assets/NIS2.jpg"></a>
+          <a href="#"><img src="assets/NIS3.jpg"></a>
+          <a href="#"><img src="assets/NIS4.jpg"></a>
+        </div>
+            <div class="product-grid show" data-products="SC">
+          <a href="#"><img src="assets/SC1.jpg"></a>
+          <a href="#"><img src="assets/SC2.jpg"></a>
+          <a href="#"><img src="assets/SC3.jpg"></a>
+          <a href="#"><img src="assets/SC4.jpg"></a>
+        </div>
+          <div class="product-grid show" data-products="CBS">
+          <a href="#"><img src="assets/CBS1.jpg"></a>
+          <a href="#"><img src="assets/CBS2.jpg"></a>
+          <a href="#"><img src="assets/CBS3.jpg"></a>
+          <a href="#"><img src="assets/CBS4.jpg"></a>
+        </div>
+        <div class="product-grid" data-products="sam">
+          <a href="#"><img src="assets/sam1.jpg"></a>
+          <a href="#"><img src="assets/sam2.jpg"></a>
+          <a href="#"><img src="assets/sam3.jpg"></a>
+         <a href="#"><img src="assets/sam4.jpg"></a>
+        </div>
+          <div class="product-grid" data-products="radar">
+          <a href="#"><img src="assets/radar1.jpg"></a>
+          <a href="#"><img src="assets/radar2.jpg"></a>
+          <a href="#"><img src="assets/radar3.jpg"></a>
+         <a href="#"><img src="assets/radar4.jpg"></a>
+        </div>
+          <div class="product-grid" data-products="Heavy">
+          <a href="#"><img src="assets/radar1.jpg"></a>
+          <a href="#"><img src="assets/radar2.jpg"></a>
+          <a href="#"><img src="assets/radar3.jpg"></a>
+         <a href="#"><img src="assets/radar4.jpg"></a>
+        </div>
+           <div class="product-grid" data-products="Precision">
+          <a href="#"><img src="assets/radar1.jpg"></a>
+          <a href="#"><img src="assets/radar2.jpg"></a>
+          <a href="#"><img src="assets/radar3.jpg"></a>
+         <a href="#"><img src="assets/radar4.jpg"></a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</li>
+
       <li class="nav-item"><a class="nav-link" href="About.html">About</a></li>
-      <li class="nav-item"><a class="nav-link active" href="Contact.html">Contact</a></li>
+      <li class="nav-item"><a class="nav-link" href="Contact.html">Contact</a></li>
     </ul>
   </div>
 </div>
 </nav>
-
 <!-- ================= CONTACT HEADER ================= -->
 <section class="section-padding bg-dark text-white text-center">
   <div class="container">
@@ -56,7 +495,7 @@ body { padding-top:70px; }
 <!-- ================= CONTACT CONTENT ================= -->
 <section class="section-padding">
 <div class="container">
-<div class="row g-5">
+<div class="row g-50">
 
   <!-- CONTACT FORM -->
   <div class="col-lg-7">
@@ -150,52 +589,103 @@ body { padding-top:70px; }
   </iframe>
 </section>
 
-<!-- ================= FOOTER ================= -->
+
+
 <footer class="pt-5 pb-4" style="background:#0b1c2d;color:#fff;">
-<div class="container">
-<div class="row">
-  <div class="col-md-4">
-    <h6>Raaga Defence Systems</h6>
-    <p>Indigenous Defence Manufacturing</p>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-3">
+        <h6>Company</h6>
+        <ul class="list-unstyled">
+          <li>About</li>
+          <li>Careers</li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h6>Defence Solutions</h6>
+        <ul class="list-unstyled">
+          <li>Shooting Ranges</li>
+          <li>Vehicles</li>
+          <li>Simulation</li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h6>Contact</h6>
+        <p>Satara, Maharashtra</p>
+      </div>
+
+      <div class="col-md-3">
+        <iframe
+          src="https://maps.google.com/maps?q=N-47%20Additional%20MIDC%20Satara&t=&z=14&ie=UTF8&iwloc=&output=embed"
+          width="100%" height="150" style="border:0;"></iframe>>
+      </div>
+
+    </div>
   </div>
-  <div class="col-md-4">
-    <h6>Quick Links</h6>
-    <ul class="list-unstyled">
-      <li><a href="About.html" class="text-white text-decoration-none">About</a></li>
-      <li><a href="Contact.html" class="text-white text-decoration-none">Contact</a></li>
-    </ul>
-  </div>
-  <div class="col-md-4">
-    <h6>Location</h6>
-    <p>Satara, Maharashtra</p>
-  </div>
-</div>
-</div>
 </footer>
 
-<footer class="py-3 text-center bg-dark text-white">
-© 2025 Raaga Defence Systems
+
+<!-- ================= FOOTER ================= -->
+<footer class="py-4 text-center">
+<p>© 2025 Raaga Defence Systems | Indigenous Defence Manufacturing</p>
 </footer>
 
-<!-- Bootstrap JS -->
+<!-- Bootstrap JS (IMPORTANT) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- FORM VALIDATION -->
 <script>
-(() => {
-  'use strict';
-  const forms = document.querySelectorAll('.needs-validation');
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      form.classList.add('was-validated');
-    }, false);
+document.querySelectorAll('.main-item').forEach(main => {
+  main.addEventListener('mouseenter', () => {
+    document.querySelectorAll('.main-item').forEach(m => m.classList.remove('active'));
+    main.classList.add('active');
+
+    document.querySelectorAll('.sub-group').forEach(s => s.classList.remove('show'));
+    document.querySelector(`.sub-group[data-parent="${main.dataset.main}"]`).classList.add('show');
   });
-})();
+});
+
+document.querySelectorAll('.sub-item').forEach(sub => {
+  sub.addEventListener('mouseenter', () => {
+    document.querySelectorAll('.sub-item').forEach(s => s.classList.remove('active'));
+    sub.classList.add('active');
+
+    document.querySelectorAll('.product-grid').forEach(p => p.classList.remove('show'));
+    document.querySelector(`.product-grid[data-products="${sub.dataset.sub}"]`).classList.add('show');
+  });
+});     
 </script>
+    <script>
+const cubeCarousel = document.getElementById('heroCarousel');
+
+cubeCarousel.addEventListener('slide.bs.carousel', function (e) {
+  const active = cubeCarousel.querySelector('.carousel-item.active');
+  const next = e.relatedTarget;
+
+  if (active) {
+    active.classList.remove('cube-in');
+    active.classList.add('cube-out');
+  }
+
+  if (next) {
+    next.classList.remove('cube-out');
+    next.classList.add('cube-in');
+  }
+});
+
+cubeCarousel.addEventListener('slid.bs.carousel', function () {
+  cubeCarousel.querySelectorAll('.carousel-item').forEach(item => {
+    item.classList.remove('cube-out');
+  });
+});
+    
+
+  
+      
+</script>
+
 
 </body>
 </html>
+
